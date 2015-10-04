@@ -17,6 +17,9 @@ require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'metadata-json-lint/rake_task'
 require 'puppet_blacksmith/rake_tasks'
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new
 
 PuppetLint.configuration.relative = true
 PuppetLint.configuration.send('disable_80chars')
@@ -47,7 +50,8 @@ task test: [
   :metadata_lint,
   :lint,
   :syntax,
-  :spec
+  :rubocop,
+  :spec,
 ]
 
 Blacksmith::RakeTask.new do |t|
